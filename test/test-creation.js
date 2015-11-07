@@ -6,13 +6,13 @@ var assert = require('assert');
 var yoAssert = require('yeoman-assert');
 var fs = require('fs');
 
-describe('ng-component generator', function () {
+describe('ng-zhaimi generator', function () {
   var gen;
 
   function generatorTest(generatorType, name, mockPrompt, callback) {
     var ngGenerator;
     var deps = [path.join('../..', generatorType)];
-    ngGenerator = helpers.createGenerator('ng-component:' + generatorType, deps, [name]);
+    ngGenerator = helpers.createGenerator('ng-zhaimi:' + generatorType, deps, [name]);
 
     helpers.mockPrompt(ngGenerator, mockPrompt);
     ngGenerator.run(function () {
@@ -28,7 +28,7 @@ describe('ng-component generator', function () {
         }
 
         fs.writeFileSync(path.join(__dirname, 'temp', '.yo-rc.json'), fs.readFileSync('../fixtures/.yo-rc.default.json'));
-        gen = helpers.createGenerator('ng-component:app', [
+        gen = helpers.createGenerator('ng-zhaimi:app', [
           '../../app'
         ]);
         done();
@@ -123,7 +123,7 @@ describe('ng-component generator', function () {
         }
 
         fs.writeFileSync(path.join(__dirname, 'temp', '.yo-rc.json'), fs.readFileSync('../fixtures/.yo-rc.custom.json'));
-        gen = helpers.createGenerator('ng-component:app', [
+        gen = helpers.createGenerator('ng-zhaimi:app', [
           '../../app'
         ]);
         done();

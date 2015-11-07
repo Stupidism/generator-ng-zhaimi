@@ -4,11 +4,11 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 
-var NgComponentGenerator = yeoman.generators.Base.extend({
+var NgZhaimiGenerator = yeoman.generators.Base.extend({
 
   initializing: function () {
     if (!this.options['skip-message']) {
-      this.log(chalk.magenta('You\'re using the fantastic NgComponent generator.\n'));
+      this.log(chalk.magenta('You\'re using the fantastic NgZhaimi generator.\n'));
       this.log(chalk.magenta('Initializing yo-rc.json configuration.\n'));
     }
   },
@@ -45,4 +45,4 @@ var NgComponentGenerator = yeoman.generators.Base.extend({
   }
 });
 
-module.exports = NgComponentGenerator;
+module.exports = NgZhaimiGenerator;

@@ -112,7 +112,7 @@ function copyTemplates (self, type, templateDir, configName) {
   }
   fs.readdirSync(templateDir)
     .forEach(function(template) {
-      var processedName = createFileName(template, self.name);
+      var processedName = createFileName(template, self.fileName || self.name);
 
       var fileName = processedName.name;
       var templateFile = path.join(templateDir, template);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('<%= scriptAppName %>')
-  .config(function ($routeProvider) {
+  .config(function($routeProvider) {
     $routeProvider
       .when('<%= route %>', {
         templateUrl: '<%= htmlUrl %>',

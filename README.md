@@ -1,4 +1,4 @@
-# generator-ng-component [![Build Status](https://secure.travis-ci.org/DaftMonk/generator-ng-component.png?branch=master)](https://travis-ci.org/DaftMonk/generator-ng-component)
+# generator-ng-zhaimi [![Build Status](https://secure.travis-ci.org/DaftMonk/generator-ng-zhaimi.png?branch=master)](https://travis-ci.org/DaftMonk/generator-ng-zhaimi)
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -7,16 +7,16 @@
 
 ### Yeoman Generators
 
-Install `yo` and `generator-ng-component` from npm:
+Install `yo` and `generator-ng-zhaimi` from npm:
 
 ```
-$ npm install -g yo generator-ng-component
+$ npm install -g yo generator-ng-zhaimi
 ```
 
 Finally, initiate the generator:
 
 ```
-$ yo ng-component
+$ yo ng-zhaimi
 ```
 
 ## Template Properties

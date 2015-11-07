@@ -24,6 +24,8 @@ var Generator = module.exports = function Generator() {
 
   this.cameledName = lodash.camelize(this.name);
   this.classedName = lodash.classify(this.name);
+  this.dashedName = lodash.dasherize(this.name);
+  this.underscoredName = lodash.underscored(this.name);
 
   this.hasFilter = function(filter) {
     return this.config.get('filters').indexOf(filter) !== -1;

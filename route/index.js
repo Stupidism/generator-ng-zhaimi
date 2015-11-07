@@ -25,6 +25,11 @@ Generator.prototype.prompting = function askFor() {
     message: 'Where would you like to create this route?',
     default: self.config.get('routeDirectory')
   }, {
+    name: 'fileName',
+    message: 'What file name would you like to use?',
+    default: name,
+    when: function() {return self.config.get('fileNamePrompt');}
+  }, {
     name: 'route',
     message: 'What will the url of your route be?',
     default: '/' + name
@@ -33,6 +38,7 @@ Generator.prototype.prompting = function askFor() {
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
     self.route = props.route;
+    self.fileName = props.fileName || self.name;
     self.dir = path.join(props.dir, self.name);
     done();
   });
@@ -40,6 +46,6 @@ Generator.prototype.prompting = function askFor() {
 
 Generator.prototype.writing = function createFiles() {
   var basePath = this.config.get('basePath') || '';
-  this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(this.dir, this.name + '.html'));
+  this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(this.dir, this.fileName + '.html'));
   ngUtil.copyTemplates(this, 'route');
 };

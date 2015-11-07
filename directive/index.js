@@ -12,6 +12,7 @@ util.inherits(Generator, ScriptBase);
 
 Generator.prototype.prompting = function askFor() {
   var self = this;
+  var name = this.name;
   var done = this.async();
 
   var prompts = [{
@@ -24,6 +25,11 @@ Generator.prototype.prompting = function askFor() {
     message: 'Where would you like to create this directive?',
     default: self.config.get('directiveDirectory')
   }, {
+    name: 'fileName',
+    message: 'What file name would you like to use?',
+    default: name,
+    when: function() {return self.config.get('fileNamePrompt');}
+  }, {
     type:'confirm',
     name: 'complex',
     message: 'Does this directive need an external html file?',
@@ -34,6 +40,7 @@ Generator.prototype.prompting = function askFor() {
     self.scriptAppName = props.moduleName || self.scriptAppName;
     self.dir = path.join(props.dir, self.name);
     self.complex = props.complex;
+    self.fileName = props.fileName;
     done();
   });
 };
@@ -47,6 +54,6 @@ Generator.prototype.writing = function createFiles() {
   }
 
   var basePath = this.config.get('basePath') || '';
-  this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(this.dir, this.name + '.html'));
+  this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(this.dir, this.fileName + '.html'));
   ngUtil.copyTemplates(this, 'directive', templateDir, configName);
 };

@@ -1,5 +1,5 @@
 {
-  "generator-ng-component": {
+  "generator-ng-zhaimi": {
     "routeDirectory": "client/app/",
     "directiveDirectory": "client/app/",
     "filterDirectory": "client/app/",
