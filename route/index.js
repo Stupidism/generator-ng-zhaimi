@@ -23,23 +23,23 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'dir',
     message: 'Where would you like to create this route?',
-    default: self.config.get('routeDirectory')
+    default: path.join(self.config.get('routeDirectory'), self.slashedName || self.underscoredName),
   }, {
     name: 'fileName',
     message: 'What file name would you like to use?',
-    default: name,
+    default: self.lastDotName || self.underscoredName,
     when: function() {return self.config.get('fileNamePrompt');}
   }, {
     name: 'route',
     message: 'What will the url of your route be?',
-    default: '/' + name
+    default: '/' + self.slashedName || name
   }];
 
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
     self.route = props.route;
     self.fileName = props.fileName || self.name;
-    self.dir = path.join(props.dir, self.name);
+    self.dir = props.dir;
     done();
   });
 };

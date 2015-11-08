@@ -22,10 +22,18 @@ var Generator = module.exports = function Generator() {
   this.appname = lodash.slugify(lodash.humanize(this.appname));
   this.scriptAppName = this.config.get('moduleName') || lodash.camelize(this.appname) + ngUtils.appName(this);
 
-  this.cameledName = lodash.camelize(this.name);
   this.classedName = lodash.classify(this.name);
-  this.dashedName = lodash.dasherize(this.name);
-  this.underscoredName = lodash.underscored(this.name);
+  this.cameledName = lodash.camelize(this.classedName);
+  this.dashedName = lodash.dasherize(this.cameledName);
+  this.underscoredName = lodash.underscored(this.cameledName);
+
+  var lastDotIdx = lodash.lastIndexOf(this.name, '.');
+  if (lastDotIdx) {
+    this.slashedName = this.name.replace(/\./g, '/');
+    this.lastDotName = this.name.substr(lastDotIdx + 1);
+  }
+  console.log(this.lastDotName);
+  console.log(this.slashedName);
 
   this.singularClassedName = this.classedName;
   this.pluralClassedName = this.classedName;
@@ -38,9 +46,6 @@ var Generator = module.exports = function Generator() {
   } else {
     this.pluralClassedName = this.classedName + 's';
   }
-
-  console.log(this.pluralClassedName);
-  console.log(this.singularClassedName);
 
   this.hasFilter = function(filter) {
     return this.config.get('filters').indexOf(filter) !== -1;
