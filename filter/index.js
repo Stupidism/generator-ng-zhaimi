@@ -13,20 +13,21 @@ util.inherits(Generator, ScriptBase);
 Generator.prototype.prompting = function askFor() {
   var self = this;
   var done = this.async();
+  var config = this.config;
   var prompts = [{
     name: 'moduleName',
     message: 'What module name would you like to use?',
     default: self.scriptAppName + '.' + self.name,
-    when: function() {return self.config.get('modulePrompt');}
+    when: function() {return config.get('modulePrompt');}
   }, {
     name: 'dir',
     message: 'Where would you like to create this filter?',
-    default: self.config.get('filterDirectory')
+    default: path.join(config.get('filterDirectory'), self.underscoredName),
   }];
 
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
-    self.dir = path.join(props.dir, self.name);
+    self.dir = props.dir;
     done();
   });
 };

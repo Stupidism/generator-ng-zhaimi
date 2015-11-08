@@ -15,10 +15,10 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
 
   configuring: function () {
     var config = {
-      'routeDirectory': this.options.routeDirectory || 'app/components/',
-      'directiveDirectory': this.options.directiveDirectory || 'app/components/',
-      'filterDirectory': this.options.filterDirectory || 'app/components/',
-      'serviceDirectory': this.options.serviceDirectory || 'app/components/',
+      'routeDirectory': this.options.routeDirectory || 'app/',
+      'directiveDirectory': this.options.directiveDirectory || 'app/directives/',
+      'filterDirectory': this.options.filterDirectory || 'app/filters/',
+      'serviceDirectory': this.options.serviceDirectory || 'app/services/',
       'basePath': this.options.basePath || 'app',
       'moduleName': this.options.moduleName || '',
       'modulePrompt': this.options.hasOwnProperty('modulePrompt') ?
@@ -33,7 +33,9 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
       'controllerTemplates': this.options.controller || '',
       'decoratorTemplates': this.options.decorator || '',
       'providerTemplates': this.options.provider || '',
-      'routeTemplates': this.options.route || ''
+      'routeTemplates': this.options.route || '',
+      'modulePrompt': this.options.modulePrompt || false,
+      'fileNamePrompt': this.options.fileNamePrompt || true
     };
 
     if (this.options.forceConfig) {

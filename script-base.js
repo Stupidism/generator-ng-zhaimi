@@ -32,8 +32,6 @@ var Generator = module.exports = function Generator() {
     this.slashedName = this.name.replace(/\./g, '/');
     this.lastDotName = this.name.substr(lastDotIdx + 1);
   }
-  console.log(this.lastDotName);
-  console.log(this.slashedName);
 
   this.singularClassedName = this.classedName;
   this.pluralClassedName = this.classedName;

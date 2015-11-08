@@ -13,22 +13,23 @@ util.inherits(Generator, ScriptBase);
 Generator.prototype.prompting = function askFor() {
   var self = this;
   var name = this.name;
+  var config = this.config;
 
   var done = this.async();
   var prompts = [{
     name: 'moduleName',
     message: 'What module name would you like to use?',
     default: self.scriptAppName + '.' + self.name,
-    when: function() {return self.config.get('modulePrompt');}
+    when: function() {return config.get('modulePrompt');}
   }, {
     name: 'dir',
     message: 'Where would you like to create this route?',
-    default: path.join(self.config.get('routeDirectory'), self.slashedName || self.underscoredName),
+    default: path.join(config.get('routeDirectory'), self.slashedName || self.underscoredName),
   }, {
     name: 'fileName',
     message: 'What file name would you like to use?',
-    default: self.lastDotName || self.underscoredName,
-    when: function() {return self.config.get('fileNamePrompt');}
+    default: config.get('defaultFileName') || self.lastDotName || self.underscoredName,
+    when: function() {return config.get('fileNamePrompt');}
   }, {
     name: 'route',
     message: 'What will the url of your route be?',

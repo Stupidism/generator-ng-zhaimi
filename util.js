@@ -1,6 +1,7 @@
 'use strict';
 var path = require('path');
 var fs = require('fs');
+var lodash = require('lodash');
 
 module.exports = {
   rewrite: rewrite,
@@ -74,7 +75,7 @@ function appName (self) {
   return suffix ? self.lodash.classify(suffix) : '';
 }
 
-function createFileName (template, name) {
+function createFileName (template, filename) {
   // Find matches for parans
   var filterMatches = template.match(/\(([^)]+)\)/g);
   var filter = '';
@@ -83,7 +84,7 @@ function createFileName (template, name) {
     template = template.replace(filterMatches[0], '');
   }
 
-  return { name: template.replace('name', name), filter: filter };
+  return { name: template.replace('name', filename), filter: filter };
 }
 
 function templateIsUsable (processedName, self) {
@@ -112,13 +113,15 @@ function copyTemplates (self, type, templateDir, configName) {
   }
   fs.readdirSync(templateDir)
     .forEach(function(template) {
-      var processedName = createFileName(template, self.fileName || self.name);
+      var underscoredFileName = lodash.underscored(self.fileName || self.name);
+      var underscoredDir = lodash.underscored(self.dir);
+      var processedName = createFileName(template, underscoredFileName);
 
       var fileName = processedName.name;
       var templateFile = path.join(templateDir, template);
 
       if(templateIsUsable(processedName, self)) {
-        self.fs.copyTpl(templateFile, path.join(self.dir, fileName), self);
+        self.fs.copyTpl(templateFile, path.join(underscoredDir, fileName), self);
       }
     });
 };

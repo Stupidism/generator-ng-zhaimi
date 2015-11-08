@@ -21,12 +21,12 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'dir',
     message: 'Where would you like to create this decorator?',
-    default: self.config.get('serviceDirectory')
+    default: path.join(self.config.get('serviceDirectory'), self.underscoredName),
   }];
 
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
-    self.dir = path.join(props.dir, self.name);
+    self.dir = props.dir;
     done();
   });
 };

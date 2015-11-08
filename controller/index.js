@@ -14,25 +14,26 @@ Generator.prototype.prompting = function askFor() {
   var self = this;
   var name = this.name;
   var done = this.async();
+  var config = this.config;
   var prompts = [{
     name: 'moduleName',
     message: 'What module name would you like to use?',
     default: self.scriptAppName + '.' + self.name,
-    when: function() {return self.config.get('modulePrompt');}
+    when: function() {return config.get('modulePrompt');}
   }, {
     name: 'dir',
     message: 'Where would you like to create this controller?',
-    default: self.config.get('routeDirectory')
+    default: path.join(config.get('routeDirectory'), self.underscoredName)
   }, {
     name: 'fileName',
     message: 'What file name would you like to use?',
-    default: name,
-    when: function() {return self.config.get('fileNamePrompt');}
+    default: config.get('defaultFileName') || self.underscoredName,
+    when: function() {return config.get('fileNamePrompt');}
   }];
 
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
-    self.dir = path.join(props.dir, self.name);
+    self.dir = props.dir;
     self.fileName = props.fileName;
     done();
   });
