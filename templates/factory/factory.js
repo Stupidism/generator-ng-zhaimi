@@ -23,7 +23,7 @@
 
     return exports;
 
-    function get<%= classedName %>s(query) {
+    function get<%= pluralClassedName %>(query) {
       return dataService
         .get<%= classedName %>s(query)
         .then(function(res) {
@@ -32,7 +32,7 @@
         });
     }
 
-    function get<%= classedName %>(id) {
+    function get<%= singularClassedName %>(id) {
       return dataService
         .get<%= classedName %>(id)
         .then(function(res) {

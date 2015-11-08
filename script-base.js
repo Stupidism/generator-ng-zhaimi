@@ -27,6 +27,21 @@ var Generator = module.exports = function Generator() {
   this.dashedName = lodash.dasherize(this.name);
   this.underscoredName = lodash.underscored(this.name);
 
+  this.singularClassedName = this.classedName;
+  this.pluralClassedName = this.classedName;
+  if (lodash.endsWith(this.name, 's')) {
+    this.singularClassedName = docktail(this.classedName);
+    function docktail(str, len) {
+      len = len || 1;
+      return str.slice(0, -len);
+    }
+  } else {
+    this.pluralClassedName = this.classedName + 's';
+  }
+
+  console.log(this.pluralClassedName);
+  console.log(this.singularClassedName);
+
   this.hasFilter = function(filter) {
     return this.config.get('filters').indexOf(filter) !== -1;
   }.bind(this);
