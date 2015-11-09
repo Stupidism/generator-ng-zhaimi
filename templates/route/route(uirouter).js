@@ -12,7 +12,7 @@
   angular.module('<%= scriptAppName %>')
     .config(function($stateProvider) {
       $stateProvider
-        .state('<%= name %>', {
+        .state('main.<%= name %>', {
           url: '<%= route %>',
           templateUrl: '<%= htmlUrl %>',
           controller: '<%= classedName %>Ctrl',
