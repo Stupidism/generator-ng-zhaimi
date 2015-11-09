@@ -33,7 +33,7 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'route',
     message: 'What will the url of your route be?',
-    default: '/' + self.slashedName || name
+    default: '/' + (self.slashedName || name)
   }];
 
   this.prompt(prompts, function (props) {
