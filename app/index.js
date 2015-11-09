@@ -16,9 +16,9 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
   configuring: function () {
     var config = {
       'routeDirectory': this.options.routeDirectory || 'app/',
-      'directiveDirectory': this.options.directiveDirectory || 'app/directives/',
-      'filterDirectory': this.options.filterDirectory || 'app/filters/',
-      'serviceDirectory': this.options.serviceDirectory || 'app/services/',
+      'directiveDirectory': this.options.directiveDirectory || 'common/directives/',
+      'filterDirectory': this.options.filterDirectory || 'common/filters/',
+      'serviceDirectory': this.options.serviceDirectory || 'common/services/',
       'basePath': this.options.basePath || 'app',
       'moduleName': this.options.moduleName || '',
       'modulePrompt': this.options.hasOwnProperty('modulePrompt') ?
