@@ -23,12 +23,12 @@ var Generator = module.exports = function Generator() {
   this.scriptAppName = this.config.get('moduleName') || lodash.camelize(this.appname) + ngUtils.appName(this);
 
   this.classedName = lodash.classify(this.name);
-  this.cameledName = lodash.camelize(this.classedName);
+  this.cameledName = lodash.camelCase(this.classedName);
   this.dashedName = lodash.dasherize(this.cameledName);
   this.underscoredName = lodash.underscored(this.cameledName);
 
   var lastDotIdx = lodash.lastIndexOf(this.name, '.');
-  if (lastDotIdx) {
+  if (lastDotIdx !== -1) {
     this.slashedName = this.name.replace(/\./g, '/');
     this.lastDotName = this.name.substr(lastDotIdx + 1);
   }
