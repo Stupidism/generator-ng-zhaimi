@@ -5,6 +5,7 @@ var lodash = require('lodash');
 var s = require('underscore.string');
 var yeoman = require('yeoman-generator');
 var ngUtils = require('./util.js');
+var chalk = require('chalk');
 
 // extend lodash with underscore.string
 lodash.mixin(s.exports());
@@ -68,3 +69,49 @@ var Generator = module.exports = function Generator() {
 };
 
 util.inherits(Generator, yeoman.generators.NamedBase);
+
+Generator.prototype.addScriptToIndex = function (script) {
+  try {
+    var appPath = this.env.options.appPath + '/';
+    var fullPath = path.join(appPath, 'index.html');
+    script = script.toLowerCase().replace(/\\/g, '/');
+    if (lodash.startsWith(script, appPath)) {
+      script = script.replace(appPath, '');
+    }
+    ngUtils.rewriteFile({
+      file: fullPath,
+      startbuild: '<!-- inject: js (ng-zhaimi) **/*.js -->',
+      endbuild: '<!-- endInject -->',
+      splicable: [
+        '<script src="' + script + '.js"></script>'
+      ]
+    });
+  } catch (e) {
+    this.log.error(chalk.yellow(
+      '\nUnable to find ' + fullPath + '. Reference to ' + script + '.js ' + 'not added.\n'
+    ));
+  }
+};
+
+Generator.prototype.addScssToMain = function (scss) {
+  try {
+    var appPath = this.env.options.appPath + '/';
+    var fullPath = path.join(appPath, 'styles/main.scss');
+    scss = scss.toLowerCase().replace(/\\/g, '/');
+    if (lodash.startsWith(scss, appPath)) {
+      scss = scss.replace(appPath, '');
+    }
+    ngUtils.rewriteFile({
+      file: fullPath,
+      startbuild: '// build:scss({.tmp,app}) **/*.scss',
+      endbuild: '// endbuild',
+      splicable: [
+        '@import \'' + scss + '\';'
+      ]
+    });
+  } catch (e) {
+    this.log.error(chalk.yellow(
+      '\nUnable to find ' + fullPath + '. Reference to _' + scss + '.scss ' + 'not added.\n'
+    ));
+  }
+};

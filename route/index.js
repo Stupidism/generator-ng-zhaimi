@@ -3,6 +3,7 @@ var path = require('path');
 var util = require('util');
 var ngUtil = require('../util');
 var ScriptBase = require('../script-base.js');
+var lodash = require('lodash');
 
 var Generator = module.exports = function Generator() {
   ScriptBase.apply(this, arguments);
@@ -33,7 +34,7 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'route',
     message: 'What will the url of your route be?',
-    default: '/' + (self.slashedName || name)
+    default: '/' + (self.lastDotName || name)
   }];
 
   this.prompt(prompts, function (props) {
@@ -47,6 +48,10 @@ Generator.prototype.prompting = function askFor() {
 
 Generator.prototype.writing = function createFiles() {
   var basePath = this.config.get('basePath') || '';
-  this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(this.dir, this.fileName + '.html'));
+  var underscoredDir = lodash.underscored(this.dir);
+  this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(underscoredDir, this.fileName + '.html'));
   ngUtil.copyTemplates(this, 'route');
+  this.addScriptToIndex(path.join(this.dir, this.fileName || this.name));
+  this.addScriptToIndex(path.join(this.dir, 'route'));
+  this.addScssToMain(path.join(this.dir, this.fileName || this.name));
 };

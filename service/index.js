@@ -40,4 +40,5 @@ Generator.prototype.prompting = function askFor() {
 
 Generator.prototype.writing = function createFiles() {
   ngUtil.copyTemplates(this, 'service');
+  this.addScriptToIndex(path.join(this.dir, this.fileName || this.name));
 };

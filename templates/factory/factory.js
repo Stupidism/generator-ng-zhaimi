@@ -17,8 +17,8 @@
     // Ordered by alphabetical order
     // 按字母序排序
     var exports = {
-      get<%= classedName %>: get<%= classedName %>,
-      get<%= classedName %>s: get<%= classedName %>s,
+      get<%= singularClassedName %>: get<%= singularClassedName %>,
+      get<%= pluralClassedName %>: get<%= pluralClassedName %>,
     };
 
     return exports;

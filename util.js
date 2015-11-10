@@ -37,26 +37,61 @@ function rewrite (args) {
 
   var lines = args.haystack.split('\n');
 
-  var otherwiseLineIndex = 0;
+  var startBuildLineIndex = -1;
+  var endBuildLineIndex = lines.length;
+  var toInjectLines = [];
+  var toInjectLineIndex = -1;
+
   lines.forEach(function (line, i) {
-    if (line.indexOf(args.needle) !== -1) {
-      otherwiseLineIndex = i;
+    // firstly get the startBuildLineIndex
+    if (line.indexOf(args.startbuild) !== -1) {
+      startBuildLineIndex = i;
+      toInjectLines = addSpacesForLines(args.splicable, line);
+
+      toInjectLines = toInjectLines.sort(function(a, b) {
+          return a > b;
+        });
+
+      if (toInjectLines.length) {
+        toInjectLineIndex = 0;
+      }
+      return;
+    }
+    // block lines before startBuildLine or after endBuildLine
+    // give up if no lines to inject
+    if (startBuildLineIndex === -1 || i > endBuildLineIndex ||
+     toInjectLineIndex >= toInjectLines.length) {
+      return;
+    }
+
+    // try inject when still have lines to inject
+    if (toInjectLineIndex >= 0) {
+      // if last line => must inject, endBuildLineIndex = curLineIndex + 1
+      // else if bigger => inject later, return
+      // else if equal => skip duplicated line with index increased
+      if (line.indexOf(args.endbuild) !== -1) {
+        endBuildLineIndex = i + 1;
+      } else if (toInjectLines[toInjectLineIndex] > line) {
+        return;
+      } else if (toInjectLines[toInjectLineIndex] === line) {
+        console.log('duplicated line: ' + line);
+        toInjectLineIndex++;
+        return;
+      }
+      lines.splice(i, 0, toInjectLines[toInjectLineIndex]);
+      toInjectLineIndex++;
     }
   });
 
-  var spaces = 0;
-  while (lines[otherwiseLineIndex].charAt(spaces) === ' ') {
-    spaces += 1;
+  function addSpacesForLines(lines, templateLine) {
+    var spaceStr = '';
+    while (templateLine.charAt(spaceStr.length) === ' ') {
+      spaceStr += ' ';
+    }
+    return lines.map(function (line) {
+      return spaceStr + line;
+    });
   }
-
-  var spaceStr = '';
-  while ((spaces -= 1) >= 0) {
-    spaceStr += ' ';
-  }
-
-  lines.splice(otherwiseLineIndex, 0, args.splicable.map(function (line) {
-    return spaceStr + line;
-  }).join('\n'));
 
   return lines.join('\n');
 }
@@ -75,7 +110,7 @@ function appName (self) {
   return suffix ? self.lodash.classify(suffix) : '';
 }
 
-function createFileName (template, filename) {
+function createFileName (template, fileName) {
   // Find matches for parans
   var filterMatches = template.match(/\(([^)]+)\)/g);
   var filter = '';
@@ -84,7 +119,7 @@ function createFileName (template, filename) {
     template = template.replace(filterMatches[0], '');
   }
 
-  return { name: template.replace('name', filename), filter: filter };
+  return { name: template.replace('name', fileName), filter: filter };
 }
 
 function templateIsUsable (processedName, self) {
@@ -113,15 +148,13 @@ function copyTemplates (self, type, templateDir, configName) {
   }
   fs.readdirSync(templateDir)
     .forEach(function(template) {
-      var underscoredFileName = lodash.underscored(self.fileName || self.name);
-      var underscoredDir = lodash.underscored(self.dir);
-      var processedName = createFileName(template, underscoredFileName);
+      var processedName = createFileName(template, self.fileName);
 
       var fileName = processedName.name;
       var templateFile = path.join(templateDir, template);
 
       if(templateIsUsable(processedName, self)) {
-        self.fs.copyTpl(templateFile, path.join(underscoredDir, fileName), self);
+        self.fs.copyTpl(templateFile, path.join(self.dir, fileName), self);
       }
     });
 };
