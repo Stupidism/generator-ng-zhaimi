@@ -27,11 +27,10 @@ var Generator = module.exports = function Generator() {
   this.cameledName = lodash.camelCase(this.classedName);
   this.dashedName = lodash.dasherize(this.cameledName);
   this.underscoredName = lodash.underscored(this.cameledName);
-
   var lastDotIdx = lodash.lastIndexOf(this.name, '.');
   if (lastDotIdx !== -1) {
-    this.slashedName = this.name.replace(/\./g, '/');
-    this.lastDotName = this.name.substr(lastDotIdx + 1);
+    this.slashedName = lodash.underscored(this.name.replace(/\./g, '/'));
+    this.lastDotName = lodash.underscored(this.name.substr(lastDotIdx + 1));
   }
 
   this.singularClassedName = this.classedName;

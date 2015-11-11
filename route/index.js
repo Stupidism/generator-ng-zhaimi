@@ -34,7 +34,7 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'route',
     message: 'What will the url of your route be?',
-    default: '/' + (self.lastDotName || name)
+    default: '/' + (self.lastDotName || self.underscoredName)
   }];
 
   this.prompt(prompts, function (props) {
