@@ -103,8 +103,8 @@ Generator.prototype.addScssToMain = function (scss) {
     }
     ngUtils.rewriteFile({
       file: fullPath,
-      startbuild: '// build:scss({.tmp,app}) **/*.scss',
-      endbuild: '// endbuild',
+      startbuild: '// inject: {scss, sass} (ng-zhaimi) **/*.{scss, sass}',
+      endbuild: '// endInject',
       splicable: [
         '@import \'' + scss + '\';'
       ]
