@@ -14,6 +14,14 @@
       $stateProvider
         .state('main.<%= name %>', {
           url: '<%= route %>',
+          template: '<div ui-view></div>',
+          abstract: true,
+          data: {
+            permissionGroup: '<%= underscoredName.toUpperCase() %>',
+          },
+        })
+        .state('main.<%= name %>.<%= fileName %>', {
+          url: '',
           templateUrl: '<%= htmlUrl %>',
           controller: '<%= classedName %>Ctrl',
           controllerAs: 'vm',

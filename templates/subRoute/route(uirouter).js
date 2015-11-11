@@ -18,7 +18,7 @@
           controller: '<%= classedName %>Ctrl',
           controllerAs: 'vm',
           data: {
-            permission: '<%= underscoredName.toUpperCase() %>.<%= fileName.toUpperCase() %>',
+            permission: '<%= lodash.underscored(fatherRoute).toUpperCase() %>.<%= fileName.toUpperCase() %>',
           },
         });
     });
