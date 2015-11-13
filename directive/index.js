@@ -27,7 +27,7 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'fileName',
     message: 'What file name would you like to use?',
-    default: config.get('defaultFileName') || self.underscoredName,
+    default: config.get('defaultFileName') || 'directive',
     when: function() {return config.get('fileNamePrompt');}
   }, {
     type:'confirm',
