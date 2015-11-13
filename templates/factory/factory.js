@@ -15,26 +15,26 @@
   function <%= cameledName %>(dataService) {
     // Public APIs here
     // Ordered by alphabetical order
-    // 按字母序排序
+    // 按字母序排列
     var exports = {
-      get<%= singularClassedName %>: get<%= singularClassedName %>,
-      get<%= pluralClassedName %>: get<%= pluralClassedName %>,
+      get: get,
+      getById: getById,
     };
 
     return exports;
 
-    function get<%= pluralClassedName %>(query) {
+    function get(query) {
       return dataService
-        .get<%= classedName %>s(query)
+        .get<%= pluralClassedName %>(query)
         .then(function(res) {
           var ret = res.data;
           return ret;
         });
     }
 
-    function get<%= singularClassedName %>(id) {
+    function getById(id) {
       return dataService
-        .get<%= classedName %>(id)
+        .get<%= singularClassedName %>(id)
         .then(function(res) {
           var ret = res.data;
           return ret;
