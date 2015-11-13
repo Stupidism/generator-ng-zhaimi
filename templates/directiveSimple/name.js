@@ -15,9 +15,22 @@
     return {
       template: '<div></div>',
       restrict: 'EA',
-      link: function(scope, element, attrs) {
-        element.text('this is the <%= cameledName %> directive');
-      }
+      scope: {
+        ngModel: '=',
+      },
+      controller: <%= cameledName %>Ctrl,
+      controllerAs: 'vm',
+      bindToController: true,
+      link: linkFunc,
     };
+    return <%= cameledName %>;
+
+    function linkFunc(/* scope, el, attr, ctrl */) {
+    }
+  }
+
+  function <%= cameledName %>Ctrl(/* $scope */) {
+    var vm = this;
+
   }
 })();

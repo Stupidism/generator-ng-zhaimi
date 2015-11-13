@@ -15,9 +15,22 @@
     var <%= cameledName %> = {
       templateUrl: '<%= htmlUrl %>',
       restrict: 'EA',
-      link: function(scope, element, attrs) {
-      }
+      scope: {
+        ngModel: '=',
+      },
+      controller: <%= cameledName %>Ctrl,
+      controllerAs: 'vm',
+      bindToController: true,
+      link: linkFunc,
     };
     return <%= cameledName %>;
+
+    function linkFunc(/* scope, el, attr, ctrl */) {
+    }
+  }
+
+  function <%= cameledName %>Ctrl(/* $scope */) {
+    var vm = this;
+
   }
 })();
