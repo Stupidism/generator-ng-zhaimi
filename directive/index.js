@@ -57,4 +57,7 @@ Generator.prototype.writing = function createFiles() {
   this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(this.dir, this.fileName + '.html'));
   ngUtil.copyTemplates(this, 'directive', templateDir, configName);
   this.addScriptToIndex(path.join(this.dir, this.fileName || this.name));
+  if (this.complex) {
+    this.addScssToMain(path.join(this.dir, this.fileName || this.name));
+  }
 };
