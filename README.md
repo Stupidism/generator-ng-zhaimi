@@ -22,10 +22,10 @@ $ yo ng-zhaimi
 ```
 vi .yo-rc.json
 ...
-"routeDirectory": "app/",
-"directiveDirectory": "common/directives/",
-"filterDirectory": "common/filters/",
-"serviceDirectory": "common/services/",
+"routeDirectory": "src/app/",
+"directiveDirectory": "src/common/directives/",
+"filterDirectory": "src/common/filters/",
+"serviceDirectory": "src/common/services/",
 ...
 "fileNamePrompt": true,
 "defaultFileName": ""
@@ -45,30 +45,31 @@ yo ng-zhaimi:factory users
 And you will get this structure:
 
 ```
-app/
-└─┬ users/
-  ├─┬ login/
-  │ ├── _login.scss
-  │ ├── login.html
-  │ ├── login.js
-  │ ├── login.spec.js
-  │ └── route.js
-  ├─┬ register/
-  │ ├── _register.scss
-  │ ├── register.html
-  │ ├── register.js
-  │ ├── register.spec.js
-  │ └── route.js
-  ├── _users.scss
-  ├── users.html
-  ├── users.js
-  ├── users.spec.js
-  └── route.js
-common/
-└─┬ services/
-  └─┬ users/
-    ├── factory.js
-    └── factory.spec.js
+src
+├─┬ app/
+│ └─┬ users/
+│   ├─┬ login/
+│   │ ├── _login.scss
+│   │ ├── login.html
+│   │ ├── login.js
+│   │ ├── login.spec.js
+│   │ └── route.js
+│   ├─┬ register/
+│   │ ├── _register.scss
+│   │ ├── register.html
+│   │ ├── register.js
+│   │ ├── register.spec.js
+│   │ └── route.js
+│   ├── _users.scss
+│   ├── users.html
+│   ├── users.js
+│   ├── users.spec.js
+│   └── route.js
+└─┬ common/
+  └─┬ services/
+    └─┬ users/
+      ├── factory.js
+      └── factory.spec.js
 ```
 
 ##### Step3: Orders
@@ -92,27 +93,28 @@ yo ng-zhaimi:directive order-item
 And you will get this structure:
 
 ```
-app/
-└─┬ orders/
-  ├─┬ item/
-  │ ├── _directive .scss
-  │ ├── directive .html
-  │ ├── directive .js
-  │ └── directive .spec.js
-  ├── _orders.scss
-  ├── orders.html
-  ├── orders.js
-  ├── orders.spec.js
-  ├── route.js
-  ├── service.spec.js
-  └── service.js
-common/
-└─┬ directives/
-  └─┬ order/
-    ├── _directive .scss
-    ├── directive .html
-    ├── directive .js
-    └── directive .spec.js
+src
+├─┬ app/
+│ └─┬ orders/
+│   ├─┬ item/
+│   │ ├── _directive .scss
+│   │ ├── directive .html
+│   │ ├── directive .js
+│   │ └── directive .spec.js
+│   ├── _orders.scss
+│   ├── orders.html
+│   ├── orders.js
+│   ├── orders.spec.js
+│   ├── route.js
+│   ├── service.spec.js
+│   └── service.js
+└─┬ common/
+  └─┬ directives/
+    └─┬ order/
+      ├── _directive .scss
+      ├── directive .html
+      ├── directive .js
+      └── directive .spec.js
 ```
 
 #### Style2: index-style names
@@ -129,30 +131,30 @@ Same as Style1, but
 Same as Style1, but you will get
 
 ```
-app/
-└─┬ users/
-  ├─┬ login/
-  │ ├── _index.scss
-  │ ├── index.html
-  │ ├── index.js
-  │ ├── index.spec.js
-  │ └── route.js
-  ├─┬ register/
-  │ ├── _index.scss
-  │ ├── index.html
-  │ ├── index.js
-  │ ├── index.spec.js
-  │ └── route.js
-  ├── _index.scss
-  ├── index.html
-  ├── index.js
-  ├── index.spec.js
-  └── route.js
-common/
-└─┬ services/
-  └─┬ users/
-    ├── factory.js
-    └── factory.spec.js
+...
+    ├─┬ login/
+    │ ├── _index.scss
+    │ ├── index.html
+    │ ├── index.js
+    │ ├── index.spec.js
+    │ └── route.js
+    ├─┬ register/
+    │ ├── _index.scss
+    │ ├── index.html
+    │ ├── index.js
+    │ ├── index.spec.js
+    │ └── route.js
+    ├── _index.scss
+    ├── index.html
+    ├── index.js
+    ├── index.spec.js
+    └── route.js
+...
+  └─┬ services/
+    └─┬ users/
+      ├── factory.js
+      └── factory.spec.js
+...
 ```
 
 ##### Step3: Orders
