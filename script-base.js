@@ -67,7 +67,7 @@ util.inherits(Generator, yeoman.generators.NamedBase);
 Generator.prototype.addScriptToIndex = function (script) {
   try {
     var appPath = this.env.options.appPath + '/';
-    var fullPath = path.join(appPath, 'index.html');
+    var fullPath = this.config.get('indexHtmlPath') || path.join(appPath, 'index.html');
     script = script.toLowerCase().replace(/\\/g, '/');
     if (lodash.startsWith(script, appPath)) {
       script = script.replace(appPath, '');
@@ -90,7 +90,7 @@ Generator.prototype.addScriptToIndex = function (script) {
 Generator.prototype.addScssToMain = function (scss) {
   try {
     var appPath = this.env.options.appPath + '/';
-    var fullPath = path.join(appPath, 'styles/main.scss');
+    var fullPath = this.config.get('mainScssPath') || path.join(appPath, 'styles/main.scss');
     scss = scss.toLowerCase().replace(/\\/g, '/');
     if (lodash.startsWith(scss, appPath)) {
       scss = scss.replace(appPath, '');

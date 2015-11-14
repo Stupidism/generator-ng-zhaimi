@@ -15,27 +15,33 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
 
   configuring: function () {
     var config = {
-      'routeDirectory': this.options.routeDirectory || 'app/',
-      'directiveDirectory': this.options.directiveDirectory || 'common/directives/',
-      'filterDirectory': this.options.filterDirectory || 'common/filters/',
-      'serviceDirectory': this.options.serviceDirectory || 'common/services/',
-      'basePath': this.options.basePath || 'app',
-      'moduleName': this.options.moduleName || '',
-      'modulePrompt': this.options.hasOwnProperty('modulePrompt') ?
+      routeDirectory: this.options.routeDirectory || 'src/app/',
+      directiveDirectory: this.options.directiveDirectory || 'src/common/directives/',
+      filterDirectory: this.options.filterDirectory || 'src/common/filters/',
+      serviceDirectory: this.options.serviceDirectory || 'src/common/services/',
+      basePath: this.options.basePath || 'src',
+      appPath: this.options.appPath || 'src/app',
+      commonPath: this.options.commonPath || 'src/common/',
+      assetsPath: this.options.assetsPath || 'src/assets/',
+      moduleName: this.options.moduleName || '',
+      modulePrompt: this.options.hasOwnProperty('modulePrompt') ?
         this.options.modulePrompt : true,
-      'filters': this.options.filters || ['uirouter', 'jasmine'],
-      'extensions': this.options.extensions || ['js', 'html', 'scss'],
-      'directiveSimpleTemplates': this.options.directiveSimple || '',
-      'directiveComplexTemplates': this.options.directiveComplex || '',
-      'filterTemplates': this.options.filter || '',
-      'serviceTemplates': this.options.service || '',
-      'factoryTemplates': this.options.factory || '',
-      'controllerTemplates': this.options.controller || '',
-      'decoratorTemplates': this.options.decorator || '',
-      'providerTemplates': this.options.provider || '',
-      'routeTemplates': this.options.route || '',
-      'modulePrompt': this.options.modulePrompt || false,
-      'fileNamePrompt': this.options.fileNamePrompt || true
+      fileNamePrompt: this.options.hasOwnProperty('fileNamePrompt') ?
+        this.options.fileNamePrompt : true,
+      filters: this.options.filters || ['uirouter', 'jasmine'],
+      extensions: this.options.extensions || ['js', 'html', 'scss'],
+      directiveSimpleTemplates: this.options.directiveSimple || '',
+      directiveComplexTemplates: this.options.directiveComplex || '',
+      filterTemplates: this.options.filter || '',
+      serviceTemplates: this.options.service || '',
+      factoryTemplates: this.options.factory || '',
+      controllerTemplates: this.options.controller || '',
+      decoratorTemplates: this.options.decorator || '',
+      providerTemplates: this.options.provider || '',
+      routeTemplates: this.options.route || '',
+      indexHtmlPath: this.options.indexHtmlPath || 'src/index.html',
+      mainScssPath: this.options.mainScssPath || 'src/app/main.scss',
+      dataServicePath: this.options.dataServicePath || 'src/common/services/data_service.js'
     };
 
     if (this.options.forceConfig) {
