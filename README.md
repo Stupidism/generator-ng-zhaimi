@@ -1,5 +1,10 @@
-# generator-ng-zhaimi [![Build Status](https://secure.travis-ci.org/DaftMonk/generator-ng-zhaimi.png?branch=master)](https://travis-ci.org/DaftMonk/generator-ng-zhaimi)
-> [Yeoman](http://yeoman.io) generator
+# generator-ng-zhaimi
+> [Yeoman](http://yeoman.io) generator  
+
+This generator was forked from angular-fullstack's frontend part: [ng-component](https://github.com/DaftMonk/generator-ng-component)  
+This generator follows the [ngbp Repo](https://github.com/ngbp/ngbp)
+and [Angular Style Guide](https://github.com/johnpapa/angular-styleguide)  
+This generator doesn't include a grunt or gulp server.
 
 ## Getting Started
 ### Yeoman Generators
