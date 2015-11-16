@@ -17,6 +17,6 @@
 
     function <%= cameledName %>Filter(input) {
       return '<%= cameledName %> filter: ' + input;
-    };
+    }
   }
 })();
