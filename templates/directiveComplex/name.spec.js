@@ -7,7 +7,7 @@
 
     // load the directive's module and view
     beforeEach(module('<%= scriptAppName %>'));
-    beforeEach(module('<%= htmlUrl %>'));
+    beforeEach(module('<%= basePath %>/<%= htmlUrl %>'));
 
     var element;
     var scope;

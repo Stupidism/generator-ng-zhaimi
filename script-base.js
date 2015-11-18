@@ -22,6 +22,7 @@ var Generator = module.exports = function Generator() {
   }
   this.appname = lodash.slugify(lodash.humanize(this.appname));
   this.scriptAppName = this.config.get('moduleName') || lodash.camelize(this.appname) + ngUtils.appName(this);
+  this.basePath = this.config.get('basePath') || 'src';
 
   this.classedName = lodash.classify(this.name);
   this.cameledName = lodash.camelCase(this.classedName);
