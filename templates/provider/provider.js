@@ -10,7 +10,7 @@
    */
   angular
     .module('<%= scriptAppName %>')
-    .service('<%= cameledName %>', <%= cameledName %>);
+    .provider('<%= cameledName %>', <%= cameledName %>);
 
   function <%= cameledName %>(dataService) {
 

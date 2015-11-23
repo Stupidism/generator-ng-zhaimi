@@ -13,5 +13,5 @@
     .service('<%= cameledName %>', <%= cameledName %>);
 
   function <%= cameledName %>(dataService) {
-  };
+  }
 })();
