@@ -3,46 +3,40 @@
 
   /**
    * @ngdoc service
-   * @name <%= scriptAppName %>.<%= cameledName %>
+   * @name <%= scriptAppName %>.<%= lodash.singularize(classedName) %>
    * @description
-   * # <%= cameledName %>
+   * # <%= lodash.singularize(classedName) %>
    * Factory in the <%= scriptAppName %>.
    */
   angular
     .module('<%= scriptAppName %>')
-    .service('<%= cameledName %>', <%= cameledName %>);
+    .factory('<%= lodash.singularize(classedName) %>', <%= lodash.singularize(classedName) %>Factory);
 
-  function <%= cameledName %>(dataService) {
-    // Public APIs here
-    // Ordered by alphabetical order
-    // 按字母序排列
-    var exports = {
-      get: get,
-      getById: getById,
-    };
+  function <%= lodash.singularize(classedName) %>Factory(zhaimiRest) {
 
-    return exports;
+    var <%= lodash.singularize(classedName) %> = zhaimiRest.all('<%= lodash.pluralize(cameledName) %>').toZhaimiService({
+      // // Object-Oriented methods of model
+      //
+      // // static members of model
+      // static: {
+      //
+      // },
+    });
 
-    function get(query) {
-      return dataService
-        .get<%= pluralClassedName %>(query)
-        .then(function(res) {
-          var ret = res.data;
-          return ret;
-        });
-    }
+    // <%= lodash.singularize(classedName) %>.addRestangularMethod('getSpecialList', 'get', 'special');
 
-    function getById(id) {
-      return dataService
-        .get<%= singularClassedName %>(id)
-        .then(function(res) {
-          var ret = res.data;
-          return ret;
-        }, function(res) {
-          // maybe id not found
-          return res;
-        });
-    }
+    // zhaimiRest.extendModel('<%= lodash.pluralize(cameledName) %>', function(element) {
+    //   // Special process before getting any element from server;
+    //   return element;
+    // });
 
-  };
+    // zhaimiRest.addRequestInterceptor(function(element, operation, what) {
+    //   if (what !== '<%= lodash.pluralize(cameledName) %>') return element;
+    //   // Please write special handling of legacy API endpoints here.
+    //
+    //   return element;
+    // });
+
+    return <%= lodash.singularize(classedName) %>;
+  }
 })();
