@@ -2,6 +2,7 @@
 var util = require('util');
 var path = require('path');
 var lodash = require('lodash');
+var lodashInflection = require('lodash-inflection');
 var s = require('underscore.string');
 var yeoman = require('yeoman-generator');
 var ngUtils = require('./util.js');
@@ -9,6 +10,7 @@ var chalk = require('chalk');
 
 // extend lodash with underscore.string
 lodash.mixin(s.exports());
+lodash.mixin(lodashInflection);
 
 var Generator = module.exports = function Generator() {
   yeoman.generators.NamedBase.apply(this, arguments);
@@ -28,18 +30,6 @@ var Generator = module.exports = function Generator() {
   this.cameledName = lodash.camelCase(this.classedName);
   this.dashedName = lodash.dasherize(this.cameledName);
   this.underscoredName = lodash.underscored(this.cameledName);
-
-  this.singularClassedName = this.classedName;
-  this.pluralClassedName = this.classedName;
-  if (lodash.endsWith(this.name, 's')) {
-    this.singularClassedName = docktail(this.classedName);
-    function docktail(str, len) {
-      len = len || 1;
-      return str.slice(0, -len);
-    }
-  } else {
-    this.pluralClassedName = this.classedName + 's';
-  }
 
   this.hasFilter = function(filter) {
     return this.config.get('filters').indexOf(filter) !== -1;

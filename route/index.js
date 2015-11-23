@@ -17,6 +17,9 @@ Generator.prototype.prompting = function askFor() {
   var config = this.config;
 
   var lastDotIdx = lodash.lastIndexOf(this.name, '.');
+  this.isSubRoute = false;
+  this.withAbstract = false;
+
   if (lastDotIdx !== -1) {
     this.isSubRoute = true;
     this.fatherRoute = this.name.substr(0, lastDotIdx);
@@ -68,11 +71,6 @@ Generator.prototype.prompting = function askFor() {
 
 Generator.prototype.writing = function createFiles() {
   var templateDir = path.join(this.sourceRoot(), 'route');
-  if (this.isSubRoute) {
-    templateDir = path.join(this.sourceRoot(), 'subRoute');
-  } else if (this.withAbstract) {
-    templateDir = path.join(this.sourceRoot(), 'routeWithAbstract');
-  }
 
   var basePath = this.config.get('basePath') || '';
   var underscoredDir = lodash.underscored(this.dir);
