@@ -1,0 +1,9 @@
+src/app/scripts/vendors/
+test/
+node_modules
+bower_components
+.tmp
+.git
+.sass-cache
+dist
+docs

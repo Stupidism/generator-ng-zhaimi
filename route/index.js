@@ -76,7 +76,4 @@ Generator.prototype.writing = function createFiles() {
   var underscoredDir = lodash.underscored(this.dir);
   this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(underscoredDir, this.fileName + '.html'));
   ngUtil.copyTemplates(this, 'route', templateDir);
-  this.addScriptToIndex(path.join(this.dir, this.fileName || this.name));
-  this.addScriptToIndex(path.join(this.dir, 'route'));
-  this.addScssToMain(path.join(this.dir, this.fileName || this.name));
 };

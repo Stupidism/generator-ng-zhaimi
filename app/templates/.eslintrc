@@ -1,0 +1,21 @@
+{
+  "extends": "eslint:recommended",
+  "plugins": [
+    "angular",
+    "jasmine"
+  ],
+  "env": {
+    "browser": true,
+    "jasmine": true
+  },
+  "globals": {
+    "angular": true,
+    "module": true,
+    "inject": true
+  },
+  "rules": {
+    "comma-dangle": [2, "always-multiline"],
+    "angular/controller-name": [2, "/[A-Z].*Ctrl$/"],
+    "no-unused-vars": 2
+  }
+}

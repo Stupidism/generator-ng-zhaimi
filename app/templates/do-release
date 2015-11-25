@@ -1,0 +1,18 @@
+#!/bin/bash
+LAST_TAG=$(git describe --abbrev=0 master)
+git-release-notes -t '^(\w*)(?:\(([^\)]*)\))?\: (.*)$' -m type -m scope -m title ${LAST_TAG}..@ <(cat <<EOF
+# Write a summary for release in the above line.
+# Lines starting with '#' will be ignored.
+# 
+# The summary of all commits since $LAST_TAG is listed below. You may remove
+# some lines or comment them out to exclude them from the tag message.
+<% commits.forEach(function (commit) { %>
+* <%=commit.type%>(<%=commit.scope%>): <%= commit.title %><% }) %>
+EOF
+) > .git/TAG_EDITMSG || exit $?
+$EDITOR .git/TAG_EDITMSG || exit $?
+git flow release start "$@" || exit $?
+git flow release finish -f .git/TAG_EDITMSG "$@" || exit $?
+git push origin master --follow-tags
+git push origin develop --follow-tags
+git checkout develop

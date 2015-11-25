@@ -3,16 +3,12 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
+var ngUtils = require('../util');
+var lodash = require('lodash');
+var s = require('underscore.string');
+lodash.mixin(s.exports());
 
 var NgZhaimiGenerator = yeoman.generators.Base.extend({
-
-  initializing: function () {
-    if (!this.options['skip-message']) {
-      this.log(chalk.magenta('You\'re using the fantastic NgZhaimi generator.\n'));
-      this.log(chalk.magenta('Initializing yo-rc.json configuration.\n'));
-    }
-  },
-
   configuring: function () {
     var config = {
       routeDirectory: this.options.routeDirectory || 'src/app/',
@@ -39,9 +35,6 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
       decoratorTemplates: this.options.decorator || '',
       providerTemplates: this.options.provider || '',
       routeTemplates: this.options.route || '',
-      indexHtmlPath: this.options.indexHtmlPath || 'src/index.html',
-      mainScssPath: this.options.mainScssPath || 'src/app/main.scss',
-      dataServicePath: this.options.dataServicePath || 'src/common/services/data_service.js'
     };
 
     if (this.options.forceConfig) {
@@ -50,6 +43,21 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
     } else {
       this.config.defaults(config);
     }
+
+    this.scriptAppName = this.config.get('moduleName') || lodash.camelize(this.appname) + ngUtils.appName(this);
+  },
+
+  initializing: function () {
+    this.composeWith('gulp-angular:app', {
+      arguments: [this.scriptAppName],
+    }, {
+      local: require.resolve('generator-gulp-angular'),
+    });
+  },
+
+  writing: function() {
+    this.lodash = lodash;
+    ngUtils.copyTemplates(this, 'src', this.sourceRoot());
   }
 });
 

@@ -1,0 +1,10 @@
+scss_files: 'src/app/**/*.scss'
+exclude:
+  - 'src/app/styles/animate.scss'
+  - 'src/app/styles/style.scss'
+
+linters:
+  EmptyRule:
+    enabled: false
+  ColorVariable:
+    enabled: false

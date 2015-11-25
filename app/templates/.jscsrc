@@ -1,0 +1,25 @@
+{
+    "preset": "google",
+    "maximumLineLength": 120,
+    "requireCurlyBraces": [
+        "else",
+        "for",
+        "while",
+        "do",
+        "try",
+        "catch",
+        "case",
+        "default"
+    ],
+    "jsDoc": {
+        "checkAnnotations": {
+          "preset": "closurecompiler",
+          "extra": {
+            "ngdoc": true,
+            "ngInject": false
+          },
+        }
+    },
+    "disallowMultipleVarDecl": false,
+    "excludeFiles": ["src/app/scripts/vendors/**"]
+}

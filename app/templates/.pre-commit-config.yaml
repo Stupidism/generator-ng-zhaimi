@@ -1,0 +1,22 @@
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: daa1e9a837eceab5c0869ea7fa22a016311391ef
+    hooks:
+    -   id: trailing-whitespace
+    -   id: check-merge-conflict
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: check-case-conflict
+-   repo: git@github.com:elidupuis/mirrors-jscs.git
+    sha: e75dbd2432de67c887670f01d65f356b1b5cfad7
+    hooks:
+    -   id: jscs
+        language_version: 4.2.2
+-   repo: git://github.com/fhnstephen/mirrors-eslint
+    sha: e939e79c49d9c05f3bc2e879f77f7bf42c8ba48f
+    hooks:
+    -   id: eslint
+        language_version: 4.2.2
+-   repo: git://github.com/pre-commit/mirrors-scss-lint
+    sha: '3eb13b9647543ad4d6a62c8be8a9131e3b99b96a'  # Use the sha you want to point at
+    hooks:
+    -   id: scss-lint

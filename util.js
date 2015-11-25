@@ -74,7 +74,6 @@ function rewrite (args) {
       } else if (toInjectLines[toInjectLineIndex] > line) {
         return;
       } else if (toInjectLines[toInjectLineIndex] === line) {
-        console.log('duplicated line: ' + line);
         toInjectLineIndex++;
         return;
       }
@@ -105,7 +104,7 @@ function appName (self) {
     }
   });
   if (counter === 0 || (typeof suffix === 'boolean' && suffix)) {
-    suffix = 'App';
+    suffix = '';
   }
   return suffix ? self.lodash.classify(suffix) : '';
 }
@@ -142,19 +141,33 @@ function templateIsUsable (processedName, self) {
 function copyTemplates (self, type, templateDir, configName) {
   templateDir = templateDir || path.join(self.sourceRoot(), type);
   configName = configName || type + 'Templates';
-
+  self.dir = self.dir || '.';
   if(self.config.get(configName)) {
     templateDir = path.join(process.cwd(), self.config.get(configName));
   }
   fs.readdirSync(templateDir)
     .forEach(function(template) {
-      var processedName = createFileName(template, self.fileName);
 
-      var fileName = processedName.name;
       var templateFile = path.join(templateDir, template);
+      if (fs.lstatSync(templateFile).isDirectory()) {
+        var dirCache = self.dir;
+        self.dir = path.join(self.dir, template);
+        if (!fs.existsSync(self.dir)) {
+          fs.mkdirSync(self.dir);
+        }
+        copyTemplates(self, type, templateFile);
+        self.dir = dirCache;
 
-      if(templateIsUsable(processedName, self)) {
-        self.fs.copyTpl(templateFile, path.join(self.dir, fileName), self);
+      } else {
+        var processedName = createFileName(template, self.fileName);
+
+        var fileName = processedName.name;
+
+        if(templateIsUsable(processedName, self)) {
+          self.fs.copyTpl(templateFile, path.join(self.dir, fileName), self);
+        } else {
+          self.fs.copy(templateFile, path.join(self.dir, fileName));
+        }
       }
     });
 };
