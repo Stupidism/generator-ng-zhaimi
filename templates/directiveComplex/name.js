@@ -30,7 +30,11 @@
   }
 
   function <%= cameledName %>Ctrl(/* $scope */) {
-    var vm = this;
+    // var vm = this;
 
+    activate();
+
+    function activate() {
+    }
   }
 })();
