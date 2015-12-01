@@ -1,22 +1,22 @@
 (function() {
   'use strict';
 
-  describe('Service: <%= cameledName %>', <%= cameledName %>Test);
+  describe('Factory: <%= lodash.singularize(classedName) %>', <%= lodash.singularize(classedName) %>Test);
 
-  function <%= cameledName %>Test() {
+  function <%= lodash.singularize(classedName) %>Test() {
 
     // load the service's module
     beforeEach(module('<%= scriptAppName %>'));
 
     // instantiate service
-    var <%= cameledName %>;
-    beforeEach(inject(function(_<%= cameledName %>_) {
-      <%= cameledName %> = _<%= cameledName %>_;
+    var <%= lodash.singularize(classedName) %>;
+    beforeEach(inject(function(_<%= lodash.singularize(classedName) %>_) {
+      <%= lodash.singularize(classedName) %> = _<%= lodash.singularize(classedName) %>_;
     }));
 
     it('should do something', function() {<% if (hasFilter('jasmine')) { %>
-      expect(!!<%= cameledName %>).toBe(true);<% } if (hasFilter('mocha')) { %>
-      <%= expect() %>!!<%= cameledName %><%= to() %>.be.true;<% } %>
+      expect(!!<%= lodash.singularize(classedName) %>).toBe(true);<% } if (hasFilter('mocha')) { %>
+      <%= expect() %>!!<%= lodash.singularize(classedName) %><%= to() %>.be.true;<% } %>
     });
   }
 })();

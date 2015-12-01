@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Service: <%= cameledName %>', <%= cameledName %>Test);
+  describe('Provider: <%= cameledName %>', <%= cameledName %>Test);
 
   function <%= cameledName %>Test() {
 

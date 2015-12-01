@@ -14,9 +14,8 @@
       <%= cameledName %> = $filter('<%= cameledName %>');
     }));
 
-    it('should return the input prefixed with "<%= cameledName %> filter:"', function() {
-      var text = 'angularjs';<% if (hasFilter('jasmine')) { %>
-      expect(<%= cameledName %>(text)).toBe('<%= cameledName %> filter: ' + text);<% } if (hasFilter('mocha')) { %>
+    it('should be something', function() {
+      <% if (hasFilter('jasmine')) { %>expect(!!<%= cameledName %>).toBe(true);<% } if (hasFilter('mocha')) { %>
       <%= expect() %><%= cameledName %>(text)<%= to() %>.equal('<%= cameledName %> filter: ' + text);<% } %>
     });
 

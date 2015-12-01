@@ -20,7 +20,7 @@
     }));
 
     it('should ...', function() {<% if (hasFilter('jasmine')) { %>
-      expect(1).toEqual(1);<% } if (hasFilter('mocha')) { %>
+      expect(!!<%= classedName %>Ctrl).toBe(true);<% } if (hasFilter('mocha')) { %>
       <%= expect() %>1<%= to() %>.equal(1);<% } %>
     });
   }
