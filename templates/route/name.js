@@ -12,13 +12,13 @@
     .module('<%= scriptAppName %>')
     .controller('<%= classedName %>Ctrl', <%= classedName %>Ctrl);
 
-  function <%= classedName %>Ctrl(notifyService, errorService) {
+  function <%= classedName %>Ctrl(/* notifyService, errorService */) {
     var vm = this;
 
     activate();
 
     function activate() {
-      vm.message = 'Hello';
+      vm.message = 'Hello, <%= cameledName %>Ctrl!';
     }
   }
 })();
