@@ -33,7 +33,7 @@
         },
       })
       .state('main.<%= name %>.<%= fileName %>', {
-        url: '',
+        url: '/<%= fileName %>',
         templateUrl: '<%= htmlUrl %>',
         controller: '<%= classedName %>Ctrl',
         controllerAs: 'vm',

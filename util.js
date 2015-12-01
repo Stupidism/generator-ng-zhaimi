@@ -165,7 +165,7 @@ function copyTemplates (self, type, templateDir, configName) {
 
         if(templateIsUsable(processedName, self)) {
           self.fs.copyTpl(templateFile, path.join(self.dir, fileName), self);
-        } else {
+        } else if (type === 'src') {
           self.fs.copy(templateFile, path.join(self.dir, fileName));
         }
       }
@@ -174,5 +174,9 @@ function copyTemplates (self, type, templateDir, configName) {
 
 function relativeUrl(basePath, targetPath) {
   var relativePath = path.relative(basePath, targetPath);
-  return relativePath.split(path.sep).join('/');
+  relativePath = relativePath.split(path.sep).join('/');
+  if (relativePath.indexOf('../src/') === 0) {
+    relativePath = relativePath.replace('../src/', '');
+  }
+  return relativePath;
 }

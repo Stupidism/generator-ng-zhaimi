@@ -37,7 +37,7 @@ Generator.prototype.prompting = function askFor() {
   }, {
     name: 'dir',
     message: 'Where would you like to create this route?',
-    default: path.join(config.get('routeDirectory'), self.slashedName || self.underscoredName),
+    default: path.join(config.get('appPath'), self.slashedName || self.underscoredName),
   }, {
     name: 'fileName',
     message: 'What file name would you like to use?',
@@ -54,7 +54,7 @@ Generator.prototype.prompting = function askFor() {
     name: 'withAbstract',
     message: 'Does this route need an abstract father state?',
     default: true,
-    when: function() {return !self.isSubRoute && defaltFileName !== self.fileName;}
+    when: function() {return defaltFileName !== self.fileName;}
   }];
 
   this.prompt(prompts, function (props) {
@@ -75,5 +75,6 @@ Generator.prototype.writing = function createFiles() {
   var basePath = this.config.get('basePath') || '';
   var underscoredDir = lodash.underscored(this.dir);
   this.htmlUrl = ngUtil.relativeUrl(basePath, path.join(underscoredDir, this.fileName + '.html'));
+
   ngUtil.copyTemplates(this, 'route', templateDir);
 };
