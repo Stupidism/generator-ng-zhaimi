@@ -14,14 +14,11 @@
 
   function <%= lodash.singularize(classedName) %>Factory(zhaimiRest) {
 
-    var <%= lodash.singularize(classedName) %> = zhaimiRest.all('<%= lodash.pluralize(underscoredName) %>').toZhaimiService({
-      // Add object-Oriented methods of model here.
-
-      // Add static members of model here.
-      // static: {
-      //
-      // },
-    });
+    var <%= lodash.singularize(classedName) %> = zhaimiRest.all('<%= lodash.pluralize(underscoredName) %>')
+      .extendModel({
+      })
+      .extendCollection({
+      });
     // Add special http request here, for example:
     // <%= lodash.singularize(classedName) %>.addRestangularMethod('getSpecialList', 'get', 'special');
 

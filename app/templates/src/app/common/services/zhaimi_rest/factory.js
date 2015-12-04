@@ -12,11 +12,10 @@
     .module('<%= scriptAppName %>')
     .factory('zhaimiRest', zhaimiRest);
 
-  /* ngInject */
-  function zhaimiRest(Restangular, dataService, $log) {
+  function zhaimiRest(Restangular, dataService, $log, notifyService, errorService) {
     return Restangular.withConfig(function(RestangularConfigurer) {
       RestangularConfigurer.setBaseUrl(dataService.baseUrl);
-      RestangularConfigurer.addRescomponseInterceptor(listNormalizingInterceptor);
+      RestangularConfigurer.addResponseInterceptor(listNormalizingInterceptor);
       RestangularConfigurer.addResponseInterceptor(returnDataInterceptor);
       RestangularConfigurer.setErrorInterceptor(errorLoggingInterceptor);
       RestangularConfigurer.setOnElemRestangularized(addGlobalMethods);
@@ -25,6 +24,77 @@
     function errorLoggingInterceptor(res) {
       $log.error(res);
       return true;
+    }
+
+    function addGlobalMethods(element, isCollection, route, restangular) {
+      if (!isCollection) {
+        return element;
+      }
+      element.remove = remove;
+      angular.extend(element, {
+        create: create,
+        one: one,
+        remove: remove,
+        extendModel: extendModel,
+        extendCollection: extendCollection,
+      });
+
+      return element;
+
+      function extendModel(members) {
+        restangular.extendModel(element.route, function(item) {
+          // Add instance members for each model in the route.
+          return angular.extend(item, members);
+        });
+        return this;
+      }
+
+      function extendCollection(members) {
+        restangular.extendCollection(element.route, function(collection) {
+          // Add instance members for each model in the route.
+          return angular.extend(collection, members);
+        });
+        angular.extend(element, members);
+        return this;
+      }
+      // Create a new empty element in the collection with fields from obj,
+      // which can be later .save()'d via a POST request.
+      function create(obj) {
+        return restangular.restangularizeElement(
+          this.parentResource, obj || {}, this.route);
+      }
+
+      function one(type, id) {
+        if (arguments.length === 1) {
+          // Handle the case of SomeResource.one('id').
+          id = type;
+          if (this.parentResource) {
+            return this.parentResource.one(this.route, id);
+          } else {
+            return restangular.one(this.route, id);
+          }
+        }
+        // Otherwise, delegate to Restangular.one.
+        return this.collection.one.apply(this, arguments);
+      }
+
+      function remove(element) {
+        // use id to remove an element;
+        var id = element.id || element;
+        var collection = this;
+        // create an element and call its remove method
+        collection.create({id: id}).remove()
+          .then(function() {
+            notifyService.success('删除成功');
+            angular.forEach(collection, function(element, index) {
+              if (element.id === id) {
+                collection.splice(index, 1);
+              }
+            });
+          }, function(res) {
+            errorService.error(res);
+          });
+      }
     }
   }
 
@@ -97,72 +167,6 @@
       }
     }
     return data;
-  }
-
-  function addGlobalMethods(element, isCollection, route, restangular) {
-    if (isCollection) {
-      // Static members for all resources returned by toZhaimiService.
-      var defaultStatic = {
-        // Create a new empty element in the collection with fields from obj,
-        // which can be later .save()'d via a POST request.
-        create: function(obj) {
-          return restangular.restangularizeElement(
-            this.parentResource, obj || {}, this.route);
-        },
-        one: function(type, id) {
-          if (arguments.length === 1) {
-            // Handle the case of SomeResource.one('id').
-            id = type;
-            if (this.parentResource) {
-              return this.parentResource.one(this.route, id);
-            } else {
-              return restangular.one(this.route, id);
-            }
-          }
-          // Otherwise, delegate to Restangular.one.
-          return this.collection.one.apply(this, arguments);
-        },
-      };
-      // Convert a collection for use as a service. It will add members to
-      // each element of the route of the given collection, and add
-      // members.static to the result service.
-      element.toZhaimiService = function(members) {
-        members = members || {};
-        var service;
-        if (this._isZhaimiRestService) {
-          // Already converted to service.
-          service = this;
-        } else {
-          // angular.copy won't copy additional properties if the target is an
-          // array. Therefore we need to copy them manually below.
-          service = [];
-          for (var key in element) {
-            service[key] = element[key];
-          }
-          // Calling this will correctly bind restangular methods to the
-          // collection.
-          service = restangular.restangularizeCollection(
-            this.parentResource, service, this.route, this.reqParams);
-          service._isZhaimiRestService = true;
-          // Store the original collection for calling original restangular
-          // methods.
-          service.collection = this;
-        }
-        // Add default and custom static members.
-        angular.extend(service, defaultStatic, members.static);
-        delete members.static;
-        // Merge instance members for later use.
-        service._members = service._members || {};
-        angular.extend(service._members, members);
-        restangular.extendModel(service.route, function(item) {
-          // Add instance members for each model in the route.
-          return angular.extend(item, service._members);
-        });
-        return service;
-      };
-    } else {
-    }
-    return element;
   }
 
 })();
