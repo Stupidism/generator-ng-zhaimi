@@ -1,7 +1,13 @@
 # generator-ng-zhaimi
 > [Yeoman](http://yeoman.io) generator  
 
-This generator was forked from [angular-fullstack](https://github.com/DaftMonk/generator-angular-fullstack)'s frontend part: [ng-component](https://github.com/DaftMonk/generator-ng-component)<br>This generator follows the [ngbp Repo](https://github.com/ngbp/ngbp) and [Angular Style Guide](https://github.com/johnpapa/angular-styleguide)<br>This generator's app part [composeWith](http://yeoman.io/authoring/composability.html) [gulp-angular](https://github.com/Swiip/generator-gulp-angular)'s app part<br>This generator's app part contains [pre-commit](http://pre-commit.com/), [scss-lint](https://github.com/brigade/scss-lint), [jscs](https://github.com/jscs-dev/node-jscs), [eslint](https://github.com/eslint/eslint) and two scripts to [do release](blob/master/app/templates/do-release) and [deploy](blob/master/app/templates/deploy.sh)<br>This generator supports [migrating](#migrate) from [generator-angular](https://github.com/yeoman/generator-angular)<br>This generator only supports extensions: [scss, js, html], for now and maybe for ever, so ignore options about style, javascript and html in promptings.
+- Forked from [angular-fullstack](https://github.com/DaftMonk/generator-angular-fullstack)'s frontend part: [ng-component](https://github.com/DaftMonk/generator-ng-component)
+- Follows the [ngbp Repo](https://github.com/ngbp/ngbp) and [Angular Style Guide](https://github.com/johnpapa/angular-styleguide)
+- [ComposeWith](http://yeoman.io/authoring/composability.html) [gulp-angular](https://github.com/Swiip/generator-gulp-angular)'s app part
+- Contains [pre-commit](http://pre-commit.com/), [scss-lint](https://github.com/brigade/scss-lint), [jscs](https://github.com/jscs-dev/node-jscs), [eslint](https://github.com/eslint/eslint) and two scripts to [do release](app/templates/do-release) and [deploy](app/templates/deploy.sh)
+- Supports [migrating](#migrate) from [generator-angular](https://github.com/yeoman/generator-angular)
+- Supports extensions: [scss, js, html], for now, so ignore options about style, javascript and html in promptings.
+- Welcome everyone to contribute.
 
 ## Getting Started
 ### Install
@@ -53,10 +59,10 @@ yo ng-zhaimi
 
 ### Documentation
 #### Main-generator
-Generator-gulp-angular
-- [docs/README](docs/README.md)
-- More informations about how to use your new project is available in the [docs/user-guide](docs/user-guide.md)
-- If you want to know: [docs/how-it-works](docs/how-it-works.md).
+[Generator-gulp-angular](https://github.com/Swiip/generator-gulp-angular)
+- [docs/README](https://github.com/Swiip/generator-gulp-angular/blob/master/docs/README.md)
+- More informations about how to use your new project is available in the [docs/user-guide](https://github.com/Swiip/generator-gulp-angular/blob/master/docs/user-guide.md)
+- If you want to know: [docs/how-it-works](https://github.com/Swiip/generator-gulp-angular/blob/master/docs/how-it-works.md).
 
 #### Sub-generators
 [Generator-angular-fullstack](https://github.com/Swiip/generator-gulp-angular)
