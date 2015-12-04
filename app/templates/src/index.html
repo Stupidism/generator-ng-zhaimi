@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Franky后台管理系统">
+    <meta name="description" content="<%= scriptAppName %>">
     <meta name="viewport" content="width=device-width">
     <meta name="robots" content="noindex">
-    <title>Franky后台管理系统</title>
+    <title><%= scriptAppName %></title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -21,7 +21,7 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body ng-app="frankyApp" ng-controller="MasterCtrl as root">
+  <body ng-app="<%= scriptAppName %>">
     <!--[if lte IE 8]>
       <p class="browsehappy">您正在使用一个<strong>过时的</strong>浏览器. 请点击参加<a href="http://browsehappy.com/">浏览器下乡, 免费以旧换新活动</a>.</p>
     <![endif]-->
