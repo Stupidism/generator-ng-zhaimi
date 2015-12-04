@@ -77,39 +77,41 @@ mv src/app/robots.txt src/app/favicon.ico src
 - Merge your **`index.*`** into new **`index.*`**. Remember to remain inject comments.
 
   Typical files:
-  - src/app/index.hmtl -> src/index.html  
+  - `src/app/index.hmtl` -> `src/index.html`  
 
-    ````
     Remember to delete script-includes injected by generator-angular, because gulp will inject them into this block when building:
 
-    ```
+    ```html
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
     <!-- js files will be automatically insert here -->
     <!-- endinject -->
     ```
-    ````
 
-  - src/app/styles/main.scss -> src/app/index.scss  
+  - `src/app/styles/main.scss` -> `src/app/index.scss`
 
-    ```
-       recommend remianing main.scss. Let gulp to inject, so that you can control **inject order** in **gulp/inject.js** like this:
-    ```
+    recommend remianing main.scss. Let gulp to inject, so that you can control **inject order** in **gulp/inject.js** like this:
 
     ```js
-        var injectFiles = gulp.src([
-          path.join(conf.paths.src, '/app/**/*.scss'),
-          path.join('!' + conf.paths.src, '/app/index.scss'),
-          path.join(conf.paths.src, '/app/styles/animate.scss'),
-          path.join(conf.paths.src, '/app/styles/style.scss'),
-        ], {read: false});
+    var injectFiles = gulp.src([
+      path.join(conf.paths.src, '/app/**/*.scss'),
+      path.join('!' + conf.paths.src, '/app/index.scss'),
+      path.join(conf.paths.src, '/app/styles/animate.scss'),
+      path.join(conf.paths.src, '/app/styles/style.scss'),
+    ], {read: false});
     ```
 
-  - src/app/scripts/app.js -> src/app/index.*.js  
+  - `src/app/scripts/app.js` -> `src/app/index.*.js`  
 
-     split app.js into module.js, run.js, route.js, config.js, ...
+    split app.js into module.js, run.js, route.js, config.js, ...
 
-- Add prefix `app/` for all assets' urls in files, including **route, directive, controller(openModal), html(img, ng-include), scss**
+- Add prefix `app/` for all assets' urls in files, including
+  - route
+  - directive
+  - controller(openModal)
+  - html(img, ng-include)
+  - scss
+
 - Config server in **gulp/server**, **uncomment** server.middleware first.
 
   ```js
@@ -141,21 +143,11 @@ mv src/app/robots.txt src/app/favicon.ico src
 
     `cp -r dist /usr/local/Cellar/nginx/1.x.x/`
 
-- Pre-commit with `pre-commit` and `pre-commit run [hookId]`  
+- [Pre-commit](#pre-commit) with `pre-commit` and `pre-commit run [hookId]`  
 
     **Your code certainly can't pass our pre-commit.**
   - Best choice: Fix them.
-  - Good choices:  
-    - change errors to warnings in .eslintrc  
-
-      ```json
-      "rules": {
-      "comma-dangle": [1, "always-multiline"],
-      "angular/controller-name": [1, "/[A-Z].*Ctrl$/"],
-      "no-unused-vars": 1
-      }
-      ```
-
+  - Good choices:
     - add comments to set envs or disable some rules  
 
       ```js
@@ -166,9 +158,25 @@ mv src/app/robots.txt src/app/favicon.ico src
       // scss-lint:enable Comment
       ```
 
+    - change errors to warnings in .eslintrc  
+
+      ```json
+      "rules": {
+        "comma-dangle": [1, "always-multiline"],
+        "angular/controller-name": [1, "/[A-Z].*Ctrl$/"],
+        "no-unused-vars": 1
+      }
+      ```
+
   - Bad choices:
-    - skip hooks `SKIP=eslint pre-commit`, `SKIP=eslint git commit ...`
     - add ignores or excludes
+    - skip hooks `SKIP=eslint pre-commit`, `SKIP=eslint git commit ...`
+
+#### Pre-commit
+- [pre-commit](http://pre-commit.com/)
+- [scss-lint](https://github.com/brigade/scss-lint)
+- [jscs](https://github.com/jscs-dev/node-jscs)
+- [eslint](https://github.com/eslint/eslint)
 
 ### Typical Workflow (kind of out-dated, but maybe have some reference significance)
 #### Style1: Readable and Short Filename
