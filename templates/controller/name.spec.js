@@ -15,7 +15,7 @@
     beforeEach(inject(function($controller, $rootScope) {
       scope = $rootScope.$new();
       <%= classedName %>Ctrl = $controller('<%= classedName %>Ctrl', {
-        $scope: scope
+        $scope: scope,
       });
     }));
 

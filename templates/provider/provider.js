@@ -12,7 +12,7 @@
     .module('<%= scriptAppName %>')
     .provider('<%= cameledName %>', <%= cameledName %>);
 
-  function <%= cameledName %>(dataService) {
+  function <%= cameledName %>() {
 
     // Private variables
     var salutation = 'Hello';
