@@ -33,7 +33,7 @@ Generator.prototype.prompting = function askFor() {
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
     self.dir = props.dir;
-    self.fileName = props.fileName;
+    self.fileName = props.fileName || 'factory';
     done();
   });
 };

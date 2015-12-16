@@ -40,7 +40,7 @@ Generator.prototype.prompting = function askFor() {
     self.scriptAppName = props.moduleName || self.scriptAppName;
     self.dir = props.dir;
     self.complex = props.complex;
-    self.fileName = props.fileName;
+    self.fileName = props.fileName || 'directive';
     done();
   });
 };
