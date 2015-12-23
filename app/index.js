@@ -48,11 +48,9 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
   },
 
   initializing: function () {
-    this.composeWith('gulp-angular:app', {
-      arguments: [this.scriptAppName],
-    }, {
-      local: require.resolve('generator-gulp-angular'),
-    });
+    this.composeWith('gulp-angular:app', { options: {
+      rjs: true
+    }});
   },
 
   writing: function() {
