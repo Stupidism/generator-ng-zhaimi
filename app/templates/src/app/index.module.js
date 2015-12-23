@@ -2,14 +2,14 @@
   'use strict';
   /**
    * @ngdoc overview
-   * @name frankyApp
+   * @name <%= scriptAppName %>
    * @description
-   * # frankyApp
+   * # <%= scriptAppName %>
    *
    * Main module of the application.
    */
   angular
-    .module('frankyApp', [
+    .module('<%= scriptAppName %>', [
       'ngAnimate',
       'ngCookies',
       'ngMessages',
