@@ -20,10 +20,8 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
       commonPath: this.options.commonPath || 'src/common/',
       assetsPath: this.options.assetsPath || 'src/assets/',
       moduleName: this.options.moduleName || '',
-      modulePrompt: this.options.hasOwnProperty('modulePrompt') ?
-        this.options.modulePrompt : true,
-      fileNamePrompt: this.options.hasOwnProperty('fileNamePrompt') ?
-        this.options.fileNamePrompt : true,
+      modulePrompt: this.options.hasOwnProperty('modulePrompt') ? this.options.modulePrompt : false,
+      fileNamePrompt: this.options.hasOwnProperty('fileNamePrompt') ? this.options.fileNamePrompt : true,
       filters: this.options.filters || ['uirouter', 'jasmine'],
       extensions: this.options.extensions || ['js', 'html', 'scss'],
       directiveSimpleTemplates: this.options.directiveSimple || '',
