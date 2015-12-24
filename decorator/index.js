@@ -13,6 +13,7 @@ util.inherits(Generator, ScriptBase);
 Generator.prototype.prompting = function askFor() {
   var self = this;
   var done = this.async();
+  var config =  this.config;
   var prompts = [{
     name: 'moduleName',
     message: 'What module name would you like to use?',
@@ -22,11 +23,17 @@ Generator.prototype.prompting = function askFor() {
     name: 'dir',
     message: 'Where would you like to create this decorator?',
     default: path.join(self.config.get('serviceDirectory'), self.underscoredName),
+  }, {
+    name: 'fileName',
+    message: 'What file name would you like to use?',
+    default: config.get('defaultFileName') || 'decorator',
+    when: function() {return config.get('fileNamePrompt');}
   }];
 
   this.prompt(prompts, function (props) {
     self.scriptAppName = props.moduleName || self.scriptAppName;
     self.dir = props.dir;
+    self.fileName = props.fileName || 'decorator';
     done();
   });
 };
