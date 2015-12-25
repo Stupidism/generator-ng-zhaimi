@@ -10,12 +10,12 @@
    */
   angular
     .module('<%= scriptAppName %>')
-    .config('<%= cameledName %>'Decorator);
+    .config(<%= cameledName %>Decorator);
 
-    function '<%= cameledName %>'Decorator($provide) {
-      $provide.decorator('<%= cameledName %>', function($delegate) {
-        // decorate the $delegate
-        return $delegate;
-      });
-    }
+  function <%= cameledName %>Decorator($provide) {
+    $provide.decorator('<%= cameledName %>', function($delegate) {
+      // decorate the $delegate
+      return $delegate;
+    });
+  }
 })();
