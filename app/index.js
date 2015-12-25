@@ -49,6 +49,7 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
     this.composeWith('gulp-angular:app', { options: {
       rjs: true
     }});
+    this.npmInstall(['eslint-plugin-jasmine'], { 'saveDev': true });
   },
 
   writing: function() {
