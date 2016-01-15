@@ -121,26 +121,31 @@ mv src/app/robots.txt src/app/favicon.ico src
 - Config server in **gulp/server**, **uncomment** server.middleware first.
 
   ```js
-    server.middleware = proxyMiddleware(
-      '/franky/api/',
-      {
-        target: 'http://franky.test.zhai.me',
-        proxyHost: 'franky.test.zhai.me',
-      }
-    );
+  var domainPort = 'franky.test.zhai.me';
+  var changeOrigin = true;
+  if (options.ip) {
+    domainPort = options.ip + ':8080';
+    changeOrigin = false;
+  } else if (options.server) {
+    domainPort = options.server;
+  }
+  server.middleware = proxyMiddleware(
+    'http://' + domainPort + '/franky/api/',
+    {changeOrigin: changeOrigin}
+  );
 
-    browserSync.instance = browserSync.init({
-         startPath: '/',
-      server: server,
-      browser: browser,
-      port: 9100,
-      ui: {
-        port: 9180,
-        weinre: {
-          port: 9190,
-        },
+  browserSync.instance = browserSync.init({
+       startPath: '/',
+    server: server,
+    browser: browser,
+    port: 9100,
+    ui: {
+      port: 9180,
+      weinre: {
+        port: 9190,
       },
-    });
+    },
+  });
   ```
 
 - Test the result with `gulp serve`, `gulp serve:dist` and `gulp build`  

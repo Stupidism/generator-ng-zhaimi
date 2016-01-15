@@ -21,7 +21,7 @@
     // .extendCollection({});
     // .extendCollection(function(collection) {return collection;})
 
-    // Add special http request here, for example:
+    // Add special and alias http request here, for example:
     // <%= lodash.pluralize(classedName) %>.addRestangularMethod('getSpecialList', 'get', 'special');
 
     // Add special process before sending any request to server here;
