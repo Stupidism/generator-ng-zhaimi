@@ -12,8 +12,8 @@
     .directive('<%= cameledName %>', <%= cameledName %>);
 
   function <%= cameledName %>() {
-    return {
-      template: '<div></div>',
+    var <%= cameledName %> = {
+      template: '<div class="<%= dashedName %>-view"></div>',
       restrict: 'EA',
       scope: {
       },
