@@ -50,6 +50,7 @@ var NgZhaimiGenerator = yeoman.generators.Base.extend({
       rjs: true
     }});
     this.npmInstall(['eslint-plugin-jasmine'], { 'saveDev': true });
+    this.npmInstall(['minimist'], { 'saveDev': true });
   },
 
   writing: function() {
