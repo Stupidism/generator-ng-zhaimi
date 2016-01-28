@@ -36,6 +36,12 @@ function browserSyncInit(baseDir, browser) {
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.0.5/README.md
    */
 
+  /*
+   * Usage:
+   * gulp serve --server franky.feature.zhai.me
+   * gulp serve --ip 192.168.12.21
+   */
+
   var domainPort = 'franky.test.zhai.me';
   var changeOrigin = true;
   if (options.ip) {
