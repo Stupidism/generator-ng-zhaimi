@@ -189,6 +189,12 @@ mv src/app/robots.txt src/app/favicon.ico src
 - [jscs](https://github.com/jscs-dev/node-jscs)
 - [eslint](https://github.com/eslint/eslint)
 
+Useful commands:
+- `pre-commit run --all-files`: run pre-commit on all files.
+- `pre-commit run (hookId)`: run single hook by hookId, which could be found in `.yaml` file.
+- `SKIP=(hookId) pre-commit`: run `pre-commit` while skipping one single hook by hookId
+- `SKIP=(hookId) git commit`: run `git commit` while skipping one single hook by hookId
+
 ### Typical Workflow (kind of out-dated, but maybe have some reference significance)
 #### Style1: Readable and Short Filename
 ##### Step1: Config
