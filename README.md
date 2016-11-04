@@ -9,6 +9,12 @@
 - Supports extensions: [scss, js, html], for now, so ignore options about style, javascript and html in promptings.
 - Welcome everyone to contribute.
 
+So happy to find 300+/month downloads after a casual glance at this repo in npm, which was published 10 months ago.
+
+However, where are my github stars? Unfortunately, I, an intern 10 months ago, didn't change the repo url after fork.
+
+Just update the link in case someone is using this repo. Welcome contribute!
+
 ## Getting Started
 ### Install
 #### Install required tools `yo`, `gulp` and `bower`:

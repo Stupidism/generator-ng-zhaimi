@@ -1,14 +1,14 @@
 {
   "name": "generator-ng-zhaimi",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "DaftMonk/generator-ng-zhaimi",
+  "repository": "stupidism/generator-ng-zhaimi",
   "author": {
-    "name": "Tyler Henkel",
+    "name": "Stupid",
     "email": "",
-    "url": "https://github.com/DaftMonk"
+    "url": "https://github.com/stupidism"
   },
   "engines": {
     "node": ">=0.10.0"
